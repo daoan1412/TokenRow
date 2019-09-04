@@ -99,7 +99,8 @@ open class TokenCell<T: TokenSearchable>: Cell<Set<T>>, CLTokenInputViewDelegate
      */
     open func setupConstraints() {
         let views = ["tokenView": tokenView]
-        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[tokenView]|", options: .alignAllLastBaseline, metrics: nil, views: views))
+
+        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-8-[tokenView]-8-|", options: .alignAllLastBaseline, metrics: nil, views: views))
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[tokenView]|", options: .alignAllLastBaseline, metrics: nil, views: views))
     }
 
@@ -130,6 +131,7 @@ open class TokenCell<T: TokenSearchable>: Cell<Set<T>>, CLTokenInputViewDelegate
 
     open func tokenInputViewDidBeginEditing(_ view: CLTokenInputView) {
         formViewController()?.beginEditing(of: self)
+        showOptions()
     }
 
     open func tokenInputViewDidEndEditing(_ view: CLTokenInputView) {
