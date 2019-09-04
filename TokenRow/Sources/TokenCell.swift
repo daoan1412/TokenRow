@@ -118,6 +118,7 @@ open class TokenCell<T: TokenSearchable>: Cell<Set<T>>, CLTokenInputViewDelegate
 
     open func tokenInputView(_ aView: CLTokenInputView, didRemove token: CLToken) {
         tokenRow.removeToken(token.context!)
+        tokenInputViewDidBeginEditing(aView)
     }
 
     open func tokenInputView(_ aView: CLTokenInputView, tokenForText text: String) -> CLToken? {

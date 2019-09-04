@@ -62,6 +62,14 @@ open class CollectionTokenCell<T, CollectionViewCell: UICollectionViewCell>: Tok
     override open func reloadOptions() {
         collectionView?.reloadData()
     }
+    
+    open override func tokenInputViewDidBeginEditing(_ view: CLTokenInputView) {
+        if let newTokens = (row as! _TokenRow<T, CollectionTokenCell<T, CollectionViewCell>>).getTokensForString("") {
+            filteredTokens = newTokens
+        }
+        showOptions()
+        reloadOptions()
+    }
 
     @objc open func tokenInputView(_ aView: CLTokenInputView, didChangeText text: String?) {
         if let text = text , !text.isEmpty {
@@ -76,6 +84,7 @@ open class CollectionTokenCell<T, CollectionViewCell: UICollectionViewCell>: Tok
         }
         reloadOptions()
     }
+
 
     //MARK: UICollectionViewDelegate and Datasource
     open func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -96,7 +105,11 @@ open class CollectionTokenCell<T, CollectionViewCell: UICollectionViewCell>: Tok
         if filteredTokens.count > (indexPath as NSIndexPath).row {
             let token = filteredTokens[(indexPath as NSIndexPath).row]
             (row as! _TokenRow<T, CollectionTokenCell>).addToken(token)
-            _ = cellResignFirstResponder()
+            if let newTokens = (row as! _TokenRow<T, CollectionTokenCell<T, CollectionViewCell>>).getTokensForString("") {
+                filteredTokens = newTokens
+            }
+            showOptions()
+            reloadOptions()
         }
     }
 
