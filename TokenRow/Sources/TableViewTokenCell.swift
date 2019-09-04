@@ -110,11 +110,9 @@ open class TableTokenCell<T, TableViewCell: UITableViewCell>: TokenCell<T>, UITa
         if filteredTokens.count > (indexPath as NSIndexPath).row {
             let token = filteredTokens[(indexPath as NSIndexPath).row]
             (row as! _TokenRow<T, TableTokenCell>).addToken(token)
-           
         }
         if let newTokens = (row as! _TokenRow<T, TableTokenCell<T, TableViewCell>>).getTokensForString("") {
             filteredTokens = newTokens
-            showOptions()
             reloadOptions()
         }
     }
