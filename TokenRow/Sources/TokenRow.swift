@@ -44,7 +44,11 @@ open class _TokenRow<T: TokenSearchable, Cell: BaseCell> : Row<Cell> where Cell:
     /// Get tokens that match a given search text. Useful when you want to get those tokens asynchronously
     open lazy var getTokensForString: (String) -> [T]? = { [weak self] searchString in
         guard let me = self else { return nil }
-
+        if searchString.isEmpty {
+            return me.options.filter {
+                return me.value == nil || !me.value!.contains($0)
+                }
+        }
         // return options that have not been chosen and that contain the searchString
         return me.options.filter {
                 return me.value == nil || !me.value!.contains($0)

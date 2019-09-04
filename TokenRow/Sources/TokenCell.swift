@@ -119,6 +119,7 @@ open class TokenCell<T: TokenSearchable>: Cell<Set<T>>, CLTokenInputViewDelegate
 
     open func tokenInputView(_ aView: CLTokenInputView, didRemove token: CLToken) {
         tokenRow.removeToken(token.context!)
+        tokenInputViewDidBeginEditing(aView)
     }
 
     open func tokenInputView(_ aView: CLTokenInputView, tokenForText text: String) -> CLToken? {
@@ -131,7 +132,6 @@ open class TokenCell<T: TokenSearchable>: Cell<Set<T>>, CLTokenInputViewDelegate
 
     open func tokenInputViewDidBeginEditing(_ view: CLTokenInputView) {
         formViewController()?.beginEditing(of: self)
-        showOptions()
     }
 
     open func tokenInputViewDidEndEditing(_ view: CLTokenInputView) {
@@ -143,5 +143,6 @@ open class TokenCell<T: TokenSearchable>: Cell<Set<T>>, CLTokenInputViewDelegate
         self.height = { height }
         formViewController()?.tableView?.beginUpdates()
         formViewController()?.tableView?.endUpdates()
+        tokenInputViewDidBeginEditing(view)
     }
 }
