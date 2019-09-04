@@ -70,7 +70,7 @@ open class TableTokenCell<T, TableViewCell: UITableViewCell>: TokenCell<T>, UITa
     }
 
     open override func tokenInputViewDidBeginEditing(_ view: CLTokenInputView) {
-        if let newTokens = (row as! _TokenRow<T, TableTokenCell<T, TableViewCell>>).getTokensForString(""), view.text?.count == 0 {
+        if let newTokens = (row as! _TokenRow<T, TableTokenCell<T, TableViewCell>>).getTokensForString("") {
             filteredTokens = newTokens
             showOptions()
             reloadOptions()
@@ -110,10 +110,7 @@ open class TableTokenCell<T, TableViewCell: UITableViewCell>: TokenCell<T>, UITa
         if filteredTokens.count > (indexPath as NSIndexPath).row {
             let token = filteredTokens[(indexPath as NSIndexPath).row]
             (row as! _TokenRow<T, TableTokenCell>).addToken(token)
-        }
-        if let newTokens = (row as! _TokenRow<T, TableTokenCell<T, TableViewCell>>).getTokensForString("") {
-            filteredTokens = newTokens
-            reloadOptions()
+            _ = cellResignFirstResponder()
         }
     }
 
