@@ -45,14 +45,12 @@ open class _TokenRow<T: TokenSearchable, Cell: BaseCell> : Row<Cell> where Cell:
     open lazy var getTokensForString: (String) -> [T]? = { [weak self] searchString in
         guard let me = self else { return nil }
         if searchString.isEmpty {
-            return me.options.filter {
-                return me.value == nil || !me.value!.contains($0)
-                }
+            return me.options.filter { return !me.value!.contains($0) }
         }
         // return options that have not been chosen and that contain the searchString
         return me.options.filter {
-                return me.value == nil || !me.value!.contains($0)
-            }.filter { $0.contains(token: searchString) }
+            return me.value == nil || !me.value!.contains($0)
+        }.filter { $0.contains(token: searchString) }
     }
 
     /// remove a token by its identifier

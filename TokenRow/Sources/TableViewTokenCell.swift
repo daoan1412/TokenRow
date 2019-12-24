@@ -77,6 +77,7 @@ open class TableTokenCell<T, TableViewCell: UITableViewCell>: TokenCell<T>, UITa
         }
     }
     
+    
     @objc open func tokenInputView(_ aView: CLTokenInputView, didChangeText text: String?) {
         if let text = text {
             if let newTokens = (row as! _TokenRow<T, TableTokenCell<T, TableViewCell>>).getTokensForString(text) {
@@ -110,6 +111,10 @@ open class TableTokenCell<T, TableViewCell: UITableViewCell>: TokenCell<T>, UITa
         if filteredTokens.count > (indexPath as NSIndexPath).row {
             let token = filteredTokens[(indexPath as NSIndexPath).row]
             (row as! _TokenRow<T, TableTokenCell>).addToken(token)
+            self.hideOptions()
+            self.showOptions()
+        }
+        if filteredTokens.isEmpty {
             _ = cellResignFirstResponder()
         }
     }

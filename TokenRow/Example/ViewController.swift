@@ -57,12 +57,14 @@ class ViewController: FormViewController {
 
                     return []
                 }
+                
         }.cellSetup({ (cell, row) in
             cell.customizeTableViewCell = { (user: User, cell: TRTableViewCell<User>) -> Void in
                 if let avatar = user.avatar, let url = URL(string: avatar) {
                     cell.imageView?.af_setImage(withURL: url, placeholderImage: UIImage(named: "profile_empty"))
                 }
             }
+            
         })
     }
 
