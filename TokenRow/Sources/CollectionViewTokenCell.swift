@@ -64,7 +64,7 @@ open class CollectionTokenCell<T, CollectionViewCell: UICollectionViewCell>: Tok
     }
 
     @objc open func tokenInputView(_ aView: CLTokenInputView, didChangeText text: String?) {
-        if let text = text , !text.isEmpty {
+        if let text = text {
             if let newTokens = (row as! _TokenRow<T, CollectionTokenCell<T, CollectionViewCell>>).getTokensForString(text) {
                 filteredTokens = newTokens
             }
