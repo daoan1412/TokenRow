@@ -62,6 +62,10 @@ open class CollectionTokenCell<T, CollectionViewCell: UICollectionViewCell>: Tok
     override open func reloadOptions() {
         collectionView?.reloadData()
     }
+    
+    override open func showOptions2(_ view: CLTokenInputView, text: String) {
+        tokenInputView(view, didChangeText: text)
+    }
 
     @objc open func tokenInputView(_ aView: CLTokenInputView, didChangeText text: String?) {
         if let text = text {

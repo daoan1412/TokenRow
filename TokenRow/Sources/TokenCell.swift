@@ -112,6 +112,8 @@ open class TokenCell<T: TokenSearchable>: Cell<Set<T>>, CLTokenInputViewDelegate
 
     /// Should reload the list of options
     open func reloadOptions() {}
+    
+    open func showOptions2(_ view: CLTokenInputView, text: String) {}
 
     open func tokenInputView(_ aView: CLTokenInputView, didAdd token: CLToken) {
         tokenRow.addToken(token.context!)
@@ -119,6 +121,7 @@ open class TokenCell<T: TokenSearchable>: Cell<Set<T>>, CLTokenInputViewDelegate
 
     open func tokenInputView(_ aView: CLTokenInputView, didRemove token: CLToken) {
         tokenRow.removeToken(token.context!)
+        showOptions2(aView, text: "")
         _ = cellResignFirstResponder()
     }
 
@@ -132,6 +135,7 @@ open class TokenCell<T: TokenSearchable>: Cell<Set<T>>, CLTokenInputViewDelegate
 
     open func tokenInputViewDidBeginEditing(_ view: CLTokenInputView) {
         formViewController()?.beginEditing(of: self)
+        showOptions2(view, text: "")
     }
 
     open func tokenInputViewDidEndEditing(_ view: CLTokenInputView) {
